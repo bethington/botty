@@ -18,6 +18,7 @@ config/custom.ini
 config/custom.*.ini
 *info_log_parsed.txt
 *info_*.png
+.idea/
 .vscode
 .vs/
 info_screenshots/
