@@ -28,6 +28,7 @@ from char.hammerdin import Hammerdin
 from char.barbarian import Barbarian
 from char.necro import Necro
 from char.poison_necro import Poison_Necro
+from char.wind_druid import Wind_Druid
 from char.basic import Basic
 from char.basic_ranged import Basic_Ranged
 from ui_manager import wait_until_hidden, wait_until_visible, ScreenObjects, is_visible
@@ -68,6 +69,8 @@ class Bot:
             self._char: IChar = Poison_Necro(Config().poison_necro, self._pather)
         elif Config().char["type"] == "necro":
             self._char: IChar = Necro(Config().necro, self._pather)
+        elif Config().char["type"] == "wind_druid":
+            self._char: IChar = Wind_Druid(Config().wind_druid, self._pather)
         elif Config().char["type"] == "basic":
             self._char: IChar = Basic(Config().basic, self._pather)
         elif Config().char["type"] == "basic_ranged":

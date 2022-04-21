@@ -46,6 +46,7 @@ class Config:
     barbarian = {}
     poison_necro = {}
     necro = {}
+    wind_druid = {}
     basic = {}
     basic_ranged = {}
 
@@ -348,6 +349,11 @@ class Config:
         self.poison_necro = self.configs["config"]["parser"]["poison_necro"]
         if "poison_necro" in self.configs["custom"]["parser"]:
             self.poison_necro.update(self.configs["custom"]["parser"]["poison_necro"])
+
+        # Druid config
+        self.wind_druid = self.configs["config"]["parser"]["wind_druid"]
+        if "wind_druid" in self.configs["custom"]["parser"]:
+            self.necro.update(self.configs["custom"]["parser"]["wind_druid"])
 
         self.advanced_options = {
             "pathing_delay_factor": min(max(int(self._select_val("advanced_options", "pathing_delay_factor")), 1), 10),
