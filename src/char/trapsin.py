@@ -52,7 +52,6 @@ class Trapsin(IChar):
             mouse.release(button="left")
         keyboard.send(Config().char["stand_still"], do_press=False)
 
-
     def _right_attack(self, cast_pos_abs: Tuple[float, float], spray: float = 10):
         keyboard.send(self._skill_hotkeys["lightning_sentry"])
         x = cast_pos_abs[0] + (random.random() * 2 * spray - spray)
@@ -66,7 +65,7 @@ class Trapsin(IChar):
                 mouse.release(button="right")
                 wait(0.15)
         atk(4)
-        keyboard.send(self._skill_hotkeys["death_sentry"])
+        # keyboard.send(self._skill_hotkeys["death_sentry"])
         atk(1)
 
     def kill_pindle(self) -> bool:
