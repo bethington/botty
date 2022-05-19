@@ -46,8 +46,8 @@ def save_and_exit() -> bool:
             exit_button = wait_until_visible(ScreenObjects.SaveAndExit, 3)
         # if exit button is found, double click it to be sure
         if exit_button.valid:
-            select_screen_object_match(exit_button, delay_factor=(0.1, 0.3))
-            wait(0.1, 0.2)
+            select_screen_object_match(exit_button, delay_factor=(0.02, 0.05))
+            wait(0.02, 0.05)
             mouse.click(button="left")
             # if center icon on player bar disappears then save/exit was successful
             success = wait_until_hidden(ScreenObjects.InGame, 3)
@@ -111,6 +111,6 @@ if __name__ == "__main__":
     print("Go to D2R window and press f11 to start game")
     keyboard.wait("f11")
     from config import Config
-    from template_finder import TemplateFinder
+    import template_finder
 
     return_to_play()

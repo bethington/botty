@@ -180,15 +180,16 @@ def hms(seconds: int):
     s = seconds % 3600 % 60
     return '{:02d}:{:02d}:{:02d}'.format(h, m, s)
 
-def load_template(path, scale_factor: float = 1.0, alpha: bool = False):
+def load_template(path):
     if os.path.isfile(path):
         try:
-            template_img = cv2.imread(path, cv2.IMREAD_UNCHANGED) if alpha else cv2.imread(path)
-            template_img = cv2.resize(template_img, None, fx=scale_factor, fy=scale_factor, interpolation=cv2.INTER_NEAREST)
+            template_img = cv2.imread(path, cv2.IMREAD_UNCHANGED)
             return template_img
         except Exception as e:
             print(e)
             raise ValueError(f"Could not load template: {path}")
+    else:
+        Logger.error(f"Template does not exist: {path}")
     return None
 
 def alpha_to_mask(img: np.ndarray):
@@ -220,6 +221,17 @@ def image_is_equal(img1: np.ndarray, img2: np.ndarray) -> bool:
         Logger.debug("image_is_equal: Image shape is not equal")
         return False
     return not(np.bitwise_xor(img1, img2).any())
+
+def arc_spread(cast_dir: Tuple[float,float], spread_deg: float=10, radius_spread: Tuple[float, float] = [.95, 1.05]):
+    """
+        Given an x,y vec (target), generate a new target that is the same vector but rotated by +/- spread_deg/2
+    """
+    cast_dir = np.array(cast_dir)
+    length = dist(cast_dir, (0, 0))
+    adj = (radius_spread[1] - radius_spread[0])*random.random() + radius_spread[0]
+    rot = spread_deg*(random.random() - .5)
+    return rotate_vec(unit_vector(cast_dir)*(length+adj), rot)
+
 
 # if __name__ == "__main__":
     # print(find_d2r_window())
